@@ -74,9 +74,15 @@ function check(){
     }
 }
 
-let keys = document.getElementsByClassName("key");
-for(let i = 0; i < keys.length; i++){
-    keys[i].dispatchEvent(new KeyboardEvent("keydown", {
-        key: keys[i].innerHTML
-    }));
-}
+document.getElementById("reset").addEventListener("click",function(){
+    isEnded = false;
+    currentRow = 0;
+    currentChar = 0; 
+    targetWord = wordsList[Math.floor(Math.random() * wordsList.length)].toLowerCase();
+    for(let i = 0; i < cells.length; i++){
+        cells[i].innerHTML = "";
+        cells[i].classList.remove("correct");
+        cells[i].classList.remove("semi");
+        cells[i].classList.remove("incorrect");
+    }
+});

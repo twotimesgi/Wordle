@@ -85,6 +85,10 @@ body{
     background-color: var(--light-grey);
 }
 
+#reset{
+    padding: 8px 40px;
+    font-size: 25px;
+}
 @keyframes shake {
     from{
         transform: translateX(-1%);
