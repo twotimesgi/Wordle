@@ -9,17 +9,9 @@ let rows = [
     [cells[20], cells[21], cells[22], cells[23], cells[24]],
     [cells[25], cells[26], cells[27], cells[28], cells[29]]
 ];
-
 let rowsHTML = document.getElementsByClassName("row");
 let targetWord = wordsList[Math.floor(Math.random() * wordsList.length)].toLowerCase();
 console.log(targetWord);
-
-
-
-
-
-
-
 let currentChar = 0;
 let currentRow = 0;
 const letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
@@ -30,20 +22,12 @@ document.addEventListener("keydown", function(e){
             check();
         }else{
         if(currentChar < 5 && e.key != "Backspace" && letters.includes(e.key.toUpperCase())){ 
-            console.log(currentRow);
-            console.log(currentChar);
-            if(currentChar != 5){
-                console.log(currentChar)
-                rows[currentRow][currentChar].style.animation = "grow 0.1s linear 1";
-                setTimeout(function(){
-                    rows[currentRow][currentChar].style.animation = "none";
-                }, 1000);
-            }
-
+            rows[currentRow][currentChar].style.animation = "grow 0.1s linear 1";
             rows[currentRow][currentChar].innerHTML = e.key;
             currentChar++;
         }else if(currentChar != 0 && e.key == "Backspace"){
             rows[currentRow][currentChar-1].innerHTML = "";
+            rows[currentRow][currentChar-1].style.animation = "none";
             currentChar--;
         }
         console.log(e.key);
@@ -64,10 +48,10 @@ function getInput(){
 function check(){
     let input = getInput(); 
     if(wordsList.includes(input)){
-
         for(let i = 0; i < 5; i++){
             if(targetWord[i] == input[i]){
                 rows[currentRow][i].classList.add("correct");
+
             }else if(targetWord.includes(input[i])){
                 rows[currentRow][i].classList.add("semi");
             }else{
@@ -90,3 +74,9 @@ function check(){
     }
 }
 
+let keys = document.getElementsByClassName("key");
+for(let i = 0; i < keys.length; i++){
+    keys[i].dispatchEvent(new KeyboardEvent("keydown", {
+        key: keys[i].innerHTML
+    }));
+}
